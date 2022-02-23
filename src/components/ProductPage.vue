@@ -2,21 +2,24 @@
   <div>
     <h3>My Product Page</h3>
     <br />
-    <div class="container d-flex flex-column">
-      <ul>
-        <li v-for="product in products" :key="product">
+    <div class="container ">
+      <ul class="d-flex flex-column align-items-center">
+        <li class="adjust" v-for="product in products" :key="product">
           {{ product.ProductId }}<br />
           <div class="card mx-auto">
             <div>
-              <h3>Product Name : {{ product.name }}</h3>
-              <div class="item__data">
+              <h5>Product Name : {{ product.name }}</h5>
+              <hr>
+              <div class="item__data d-flex flex-column align-items-center">
                 <div>
                   <p>Product Description : {{ product.description }}</p>
                 </div>
                 <div>
-                  <p>Product Price : {{ product.price }}</p>
+                  <p>Product Price : ₹{{ product.price }}</p>
                 </div>
+              
                 <div>
+                  <hr>
                   <button v-on:click="addProduct(product.ProductId)">
                     Add Product
                   </button>
@@ -85,6 +88,7 @@ li {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   text-align: center;
   max-width: 25rem;
+  margin-bottom: 2rem !important;
 }
 
 img {
@@ -116,6 +120,7 @@ button {
   border-radius: 30px;
   cursor: pointer;
   padding: 0.5rem 1.5rem;
+  margin-bottom: 1rem;
 }
 
 button:hover,
