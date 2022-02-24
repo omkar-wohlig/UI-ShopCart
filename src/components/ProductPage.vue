@@ -15,7 +15,7 @@
                   <p>Product Description : {{ product.description }}</p>
                 </div>
                 <div>
-                  <p>Product Price : ₹{{ product.price }}</p>
+                  <p>Product Price : {{ product.price }}</p>
                 </div>
               
                 <div>
