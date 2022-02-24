@@ -1,138 +1,161 @@
+
 <template>
   <div class="vue-tempalte">
-    <img src="../assets/food.svg" alt="FasEat Private Limited" />
-    <h3> Welcome to FasEat Private Limited!</h3>
-    <div
-      class="card mx-auto shadow-lg p-3 mb-5 bg-white rounded"
-      style="width: 60rem"
-    >
-      <div class="card-body">
-        <div class="register">
-          <div class="clr">
-            <h1>Sign-Up Form</h1>
-            <hr />
+    <TopNavbar></TopNavbar>
+      <div
+        class="card mx-auto shadow-lg p-3 mb-5 bg-white rounded"
+        style="width: 60rem"
+      >
+        <div class="card-body">
+          <div class="register">
+            <div class="clr">
+              <h1>Sign-Up Form</h1>
+              <hr />
+            </div>
+            
+            <form method="POST" @submit.prevent="submit">
+              <label for="CustomerId">CustomerId: </label><br />
+              <input
+                type="text"
+                name="CustomerId"
+                v-model.trim="$v.CustomerId.$model"
+                placeholder="Your Customer ID"
+              />
+              
+              <div class="error" v-if="!$v.CustomerId.required">
+                Field is required
+              </div>
+              <br />
+              <br />
+
+              <label for="fname">First Name: </label><br />
+              <input
+                type="text"
+                name="fname"
+                v-model.trim="$v.fname.$model"
+                placeholder="Your First Name"
+              />
+              <div class="error" v-if="!$v.fname.required">
+                Field is required
+              </div>
+              <br />
+              <div class="error" v-if="!$v.fname.alpha">Only Characters</div>
+              <br />
+
+              <label for="lname">Last Name: </label><br />
+              <input
+                type="text"
+                name="lname"
+                v-model.trim="$v.lname.$model"
+                placeholder="Your Last name"
+              />
+              <div class="error" v-if="!$v.lname.required">
+                Field is required
+              </div>
+              <br />
+              <br />
+
+              <label for="phone_no">Mobile Number: </label><br />
+              <input
+                type="number"
+                name="phone_no"
+                v-model.trim="$v.phone_no.$model"
+                placeholder="Your mobile number"
+              />
+              <div class="error" v-if="!$v.phone_no.required">
+                Field is required
+              </div>
+              <br />
+              <br />
+
+              <label for="email">Email: </label><br />
+              <input
+                type="email"
+                name="email"
+                v-model.trim="$v.email.$model"
+                placeholder="Enter your Email"
+              />
+              <div class="error" v-if="!$v.email.required">
+                Field is required
+              </div>
+              <div class="error" v-if="!$v.email.email">
+                Enter valid email address
+              </div>
+              <br />
+              <br />
+
+              <label for="password">Password: </label><br />
+              <input
+                type="password"
+                name="password"
+                v-model.trim="$v.password.$model"
+                placeholder="Enter your Password"
+              />
+              <div class="error" v-if="!$v.password.required">
+                Field is required
+              </div>
+              <div class="error" v-if="!$v.password.valid">
+                Minimum Length of password should be 8 and contain atleast 1
+                Upercase, 1 lowercase and 1 special character
+              </div>
+              <br />
+              <br />
+              <a href="/login">
+                <button
+                  class="button ton"
+                  type="submit"
+                  :disabled="submitStatus === 'PENDING'"
+                >
+                  Submit!
+                </button>
+              </a>
+              <p class="typo__p" v-if="submitStatus === 'OK'">
+                Thanks for your submission!
+              </p>
+              <p class="typo__p" v-if="submitStatus === 'ERROR'">
+                Please fill the form correctly.
+              </p>
+              <p class="typo__p" v-if="submitStatus === 'PENDING'">
+                Sending...
+              </p>
+            </form>
           </div>
-
-          <form method="POST" @submit.prevent="submit">
-            <label for="CustomerId">CustomerId: </label><br />
-            <input
-              type="text"
-              name="CustomerId"
-              v-model.trim="$v.CustomerId.$model"
-              placeholder="Your Customer ID"
-            />
-            <div class="error" v-if="!$v.CustomerId.required">
-              Field is required
-            </div>
-            <br />
-            <br />
-
-            <label for="fname">First Name: </label><br />
-            <input
-              type="text"
-              name="fname"
-              v-model.trim="$v.fname.$model"
-              placeholder="Your First Name"
-            />
-            <div class="error" v-if="!$v.fname.required">Field is required</div>
-            <br />
-            <div class="error" v-if="!$v.fname.alpha">Only Characters</div>
-            <br />
-
-            <label for="lname">Last Name: </label><br />
-            <input
-              type="text"
-              name="lname"
-              v-model.trim="$v.lname.$model"
-              placeholder="Your Last name"
-            />
-            <div class="error" v-if="!$v.lname.required">Field is required</div>
-            <br />
-            <br />
-
-            <label for="phone_no">Mobile Number: </label><br />
-            <input
-              type="number"
-              name="phone_no"
-              v-model.trim="$v.phone_no.$model"
-              placeholder="Your mobile number"
-            />
-            <div class="error" v-if="!$v.phone_no.required">
-              Field is required
-            </div>
-            <br />
-            <br />
-
-            <label for="email">Email: </label><br />
-            <input
-              type="email"
-              name="email"
-              v-model.trim="$v.email.$model"
-              placeholder="Enter your Email"
-            />
-            <div class="error" v-if="!$v.email.required">Field is required</div>
-            <div class="error" v-if="!$v.email.email">
-              Enter valid email address
-            </div>
-            <br />
-            <br />
-
-            <label for="password">Password: </label><br />
-            <input
-              type="password"
-              name="password"
-              v-model.trim="$v.password.$model"
-              placeholder="Enter your Password"
-            />
-            <div class="error" v-if="!$v.password.required">
-              Field is required
-            </div>
-            <div class="error" v-if="!$v.password.valid">
-              Minimum Length of password should be 8 and contain atleast 1
-              Upercase, 1 lowercase and 1 special character
-            </div>
-            <br />
-            <br />
-            <a href="/login">
-              <button
-                class="button"
-                type="submit"
-                :disabled="submitStatus === 'PENDING'"
-              >
-                Submit!
-              </button>
-            </a>
-            <p class="typo__p" v-if="submitStatus === 'OK'">
-              Thanks for your submission!
-            </p>
-            <p class="typo__p" v-if="submitStatus === 'ERROR'">
-              Please fill the form correctly.
-            </p>
-            <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
-          </form>
         </div>
       </div>
-    </div>
+
     <br />
     <br />
-    <a href="/login"> Login, Instead?</a>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { required,alpha,numeric, maxLength, minLength,email } from "vuelidate/lib/validators";
+import {
+  required,
+  alpha,
+  numeric,
+  maxLength,
+  minLength,
+  email,
+} from "vuelidate/lib/validators";
+import TopNavbar from "./TopNavbar.vue";
+import Footer from "./Footer.vue";
 
 export default {
   devServer: {
     proxy: "http://localhost:3000",
+  },
+  components: {
+    TopNavbar,
+    Footer,
   },
   data() {
     return {
       CustomerId: "",
       fname: "",
       lname: "",
-      phone_no: '',
+      phone_no: "",
       email: "",
       password: "",
       submitStatus: "",
@@ -184,11 +207,11 @@ export default {
       required,
       alpha,
     },
-    phone_no:{
-          required,
-          numeric,
-          maxLength: maxLength(10)
-      },
+    phone_no: {
+      required,
+      numeric,
+      maxLength: maxLength(10),
+    },
     email: {
       required,
       email,
@@ -212,7 +235,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .social-icons {
   text-align: center;
   font-family: "Open Sans";
@@ -258,9 +281,6 @@ export default {
 .error {
   color: red;
 }
-</style>
-
-<style scoped>
 input {
   background-color: rgb(212, 212, 212);
   border-radius: 2rem;
@@ -272,6 +292,20 @@ input {
   margin-bottom: 10px; /* Added */
   background-color: aliceblue;
   z-index: 5;
-  background: url("../assets/bg3.jpg");
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    url("");
+}
+.ton {
+  background-image: linear-gradient(coral, gold);
+  border-radius: 2rem;
+}
+.vue-tempalte {
+  background: url("../assets/fud.jpg");
+}
+.card.mx-auto.shadow-lg.p-3.mb-5.bg-white.rounded {
+    margin-top: 5rem;
 }
 </style>

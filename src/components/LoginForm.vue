@@ -32,6 +32,7 @@ import { required,email} from 'vuelidate/lib/validators';
 import axios from 'axios'
 
 export default {
+  name: "LoginForm",
   
   data(){
 

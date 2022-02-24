@@ -70,7 +70,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .card{
     border: 1px solid black;
 }

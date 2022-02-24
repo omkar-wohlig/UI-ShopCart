@@ -8,8 +8,11 @@ import RegisterForm from './components/RegisterForm.vue';
 import HomeComponent from './components/HomeComponent.vue';
 import ProductPage from './components/ProductPage.vue';
 import CartPage from './components/CartPage.vue';
+import BaseCard from './components/BaseCard.vue';
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
+
+Vue.component('BaseCard',BaseCard);
 
 Vue.config.productionTip = false
 
@@ -17,11 +20,11 @@ Vue.config.productionTip = false
 const router = new VueRouter({
   mode:"history",
   routes:[
-    {path:'/login', component:LoginForm}, //our-domain/login
     {path:'/', component:RegisterForm},
+    {name: 'login',title:'login',path:'/login', component:LoginForm}, //our-domain/login
     {path:'/home', component:HomeComponent},
     {path:'/products', component:ProductPage},
-    {path:'/mycart',component:CartPage}
+    {path:'/mycart',component:CartPage},
   ],
 });
 
