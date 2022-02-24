@@ -271,5 +271,7 @@ input {
   float: none; /* Added */
   margin-bottom: 10px; /* Added */
   background-color: aliceblue;
+  z-index: 5;
+  background: url("../assets/bg3.jpg");
 }
 </style>
