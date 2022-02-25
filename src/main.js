@@ -9,6 +9,13 @@ import HomeComponent from './components/HomeComponent.vue';
 import ProductPage from './components/ProductPage.vue';
 import CartPage from './components/CartPage.vue';
 import BaseCard from './components/BaseCard.vue';
+
+
+import Vuetify from 'vuetify'
+// index.js or main.js
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+
+Vue.use(Vuetify)
 Vue.use(Vuelidate);
 Vue.use(VueRouter);
 
